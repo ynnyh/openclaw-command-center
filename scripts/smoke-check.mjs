@@ -44,7 +44,6 @@ function expectNoBundledPreviewPngs(dir) {
 [
   'README.md',
   'README.en.md',
-  'README.zh-CN.md',
   'install.ps1',
   'install.sh',
   '.env.example',
@@ -63,14 +62,11 @@ function expectNoBundledPreviewPngs(dir) {
   'shell/mission-control-assets/README.md'
 ].forEach(expectFile);
 
-expectIncludes('README.md', '[中文说明](README.zh-CN.md)');
-expectIncludes('README.md', '[English README](README.en.md)');
-expectIncludes('README.md', '[Architecture](docs/architecture.md)');
-expectIncludes('README.md', '[Compatibility](docs/compatibility.md)');
-expectIncludes('README.md', '[Troubleshooting](docs/troubleshooting.md)');
+expectIncludes('README.md', '[English](README.en.md)');
+expectIncludes('README.md', '## 这是什么');
 
 expectIncludes('README.en.md', 'The public README does not embed product screenshots');
-expectIncludes('README.zh-CN.md', '公开 README 不嵌入产品截图');
+expectIncludes('README.en.md', '[中文](README.md)');
 
 expectIncludes('install.sh', 'examples/openclaw.command-center.patch.json');
 expectIncludes('install.sh', 'examples/docker-compose.command-center.override.yml');
@@ -98,6 +94,7 @@ expectNoBundledPreviewPngs('shell/mission-control-assets');
   'docs/command-center-open-source-plan.md',
   'docs/command-center-public-file-manifest.md',
   'docs/command-center-public-readme-template.md',
+  'README.zh-CN.md',
   'screenshots/overview-hero-zh.png',
   'screenshots/staff-zh.png',
   'screenshots/token-share-zh.png'

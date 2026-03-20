@@ -457,6 +457,37 @@ async function inspectServices() {
   });
 }
 
+function fallbackServices(error) {
+  return Object.values(serviceDefinitions).map((service) => ({
+    id: service.id,
+    name: service.name,
+    path: service.path,
+    command: service.command,
+    configured: service.configured,
+    running: false,
+    processCount: 0,
+    managed: false,
+    processes: [],
+    inspectionError: error.message || String(error)
+  }));
+}
+
+async function inspectServicesSafe() {
+  try {
+    return {
+      ok: true,
+      services: await inspectServices(),
+      error: null
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      services: fallbackServices(error),
+      error: error.message || String(error)
+    };
+  }
+}
+
 async function stopService(id) {
   ensureService(id);
   const services = await inspectServices();
@@ -531,6 +562,7 @@ function writeJson(response, request, statusCode, payload) {
 }
 
 async function buildSnapshot() {
+  const inspection = await inspectServicesSafe();
   return {
     helper: {
       ok: true,
@@ -538,6 +570,8 @@ async function buildSnapshot() {
       startedAt: helperStartedAt,
       origin: `http://${HOST}:${PORT}`,
       socket: `ws://${HOST}:${PORT}/ws`,
+      partial: !inspection.ok,
+      warning: inspection.ok ? null : `Service inspection degraded: ${inspection.error}`,
       config: {
         ...helperConfig,
         allowedOrigins: helperConfig.allowedOrigins.length
@@ -545,7 +579,7 @@ async function buildSnapshot() {
           : ['loopback origins only']
       }
     },
-    services: await inspectServices(),
+    services: inspection.services,
     diagnostics: diagnostics.slice(-10)
   };
 }

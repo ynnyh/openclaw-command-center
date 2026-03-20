@@ -1,6 +1,6 @@
 # OpenClaw Command Center
 
-[中文说明](README.zh-CN.md) | [README Index](README.md)
+[中文](README.md)
 
 OpenClaw Command Center is a control UI overlay package for an existing OpenClaw deployment. It reuses the native `<openclaw-app>` runtime and layers a Mission Control shell, overview pages, and an optional host-side helper for diagnostics on top.
 
