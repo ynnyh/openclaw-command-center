@@ -129,6 +129,11 @@ COMMAND_CENTER_TENCENTCODE_DIR=
 - The repository does not commit upstream runtime chunks by default
 - The public README does not embed product screenshots
 
+## Collaboration
+
+- Contribution guide: `CONTRIBUTING.md`
+- Security policy: `SECURITY.md`
+
 ## License
 
 MIT

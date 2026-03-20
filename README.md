@@ -127,6 +127,11 @@ COMMAND_CENTER_TENCENTCODE_DIR=
 - 仓库默认不提交 upstream runtime chunks
 - 公开 README 不嵌入产品截图
 
+## 协作
+
+- 贡献指南：`CONTRIBUTING.md`
+- 安全策略：`SECURITY.md`
+
 ## License
 
 MIT

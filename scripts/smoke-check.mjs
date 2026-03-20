@@ -44,6 +44,8 @@ function expectNoBundledPreviewPngs(dir) {
 [
   'README.md',
   'README.en.md',
+  'CONTRIBUTING.md',
+  'SECURITY.md',
   'install.ps1',
   'install.sh',
   '.env.example',
@@ -59,7 +61,12 @@ function expectNoBundledPreviewPngs(dir) {
   'shell/index.html',
   'shell/mission-control.html',
   'shell/mission-control-overview.html',
-  'shell/mission-control-assets/README.md'
+  'shell/mission-control-assets/README.md',
+  '.github/workflows/smoke.yml',
+  '.github/pull_request_template.md',
+  '.github/ISSUE_TEMPLATE/bug_report.md',
+  '.github/ISSUE_TEMPLATE/feature_request.md',
+  '.github/ISSUE_TEMPLATE/config.yml'
 ].forEach(expectFile);
 
 expectIncludes('README.md', '[English](README.en.md)');
@@ -67,6 +74,10 @@ expectIncludes('README.md', '## 这是什么');
 
 expectIncludes('README.en.md', 'The public README does not embed product screenshots');
 expectIncludes('README.en.md', '[中文](README.md)');
+expectIncludes('README.md', '贡献指南：`CONTRIBUTING.md`');
+expectIncludes('README.md', '安全策略：`SECURITY.md`');
+expectIncludes('README.en.md', 'Contribution guide: `CONTRIBUTING.md`');
+expectIncludes('README.en.md', 'Security policy: `SECURITY.md`');
 
 expectIncludes('install.sh', 'examples/openclaw.command-center.patch.json');
 expectIncludes('install.sh', 'examples/docker-compose.command-center.override.yml');
