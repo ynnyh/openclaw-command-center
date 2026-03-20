@@ -1,0 +1,250 @@
+/* ═══ 桃花源 — Taohua Peach Blossom ═══ */
+
+/* ── Dark mode (夜桃) ── */
+:root, :host, html {
+  --bg:          #221a22 !important;
+  --bg-accent:   #2a1f2c !important;
+  --bg-elevated: #322636 !important;
+  --bg-hover:    #3a2e40 !important;
+  --bg-muted:    #261e28 !important;
+  --bg-content:  #241c26 !important;
+
+  --card:            rgba(42, 31, 44, 0.80) !important;
+  --card-foreground: #f0e8ec !important;
+  --card-highlight:  rgba(232, 137, 158, 0.05) !important;
+
+  --popover:            rgba(42, 31, 44, 0.94) !important;
+  --popover-foreground: #f0e8ec !important;
+
+  --panel:        #221a22 !important;
+  --panel-strong: #2a1f2c !important;
+  --panel-hover:  #3a2e40 !important;
+
+  --chrome:        #221a22f2 !important;
+  --chrome-strong: #221a22fa !important;
+
+  --text:        #f0e8ec !important;
+  --text-strong: #faf4f6 !important;
+  --chat-text:   #f0e8ec !important;
+
+  --muted:            #8a7a84 !important;
+  --muted-strong:     #6a5a64 !important;
+  --muted-foreground: #8a7a84 !important;
+
+  --border:        rgba(232, 137, 158, 0.10) !important;
+  --border-strong: rgba(232, 137, 158, 0.20) !important;
+  --border-hover:  rgba(232, 137, 158, 0.35) !important;
+
+  --input: rgba(232, 137, 158, 0.07) !important;
+  --ring:  #e8899e !important;
+
+  --accent:            #e8899e !important;
+  --accent-hover:      #f0a0b4 !important;
+  --accent-muted:      #e8899ecc !important;
+  --accent-subtle:     rgba(232, 137, 158, 0.10) !important;
+  --accent-foreground: #221a22 !important;
+  --accent-glow:       rgba(232, 137, 158, 0.20) !important;
+
+  --primary:            #e8899e !important;
+  --primary-foreground: #221a22 !important;
+
+  --secondary:            #322636 !important;
+  --secondary-foreground: #f0e8ec !important;
+
+  --accent-2:        #c9a0dc !important;
+  --accent-2-muted:  #c9a0dcb3 !important;
+  --accent-2-subtle: rgba(201, 160, 220, 0.10) !important;
+
+  --ok:        #7dcea0 !important;
+  --ok-muted:  #7dcea0bf !important;
+  --ok-subtle: rgba(125, 206, 160, 0.08) !important;
+
+  --destructive:            #e06070 !important;
+  --destructive-foreground: #fff !important;
+
+  --warn:        #dab060 !important;
+  --warn-muted:  #dab060bf !important;
+  --warn-subtle: rgba(218, 176, 96, 0.08) !important;
+
+  --danger:        #e06070 !important;
+  --danger-muted:  #e06070bf !important;
+  --danger-subtle: rgba(224, 96, 112, 0.08) !important;
+
+  --info: #7ab0d4 !important;
+
+  --focus:      rgba(232, 137, 158, 0.15) !important;
+  --focus-ring: 0 0 0 2px #221a22, 0 0 0 3px rgba(232, 137, 158, 0.5) !important;
+  --focus-glow: 0 0 0 2px #221a22, 0 0 0 3px #e8899e, 0 0 14px rgba(232, 137, 158, 0.12) !important;
+
+  --grid-line: rgba(232, 137, 158, 0.04) !important;
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.4) !important;
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.45) !important;
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.5) !important;
+  --shadow-xl:   0 16px 48px rgba(0,0,0,0.6) !important;
+  --shadow-glow: 0 0 20px rgba(232, 137, 158, 0.08) !important;
+
+  --font-display: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  --mono:         'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace !important;
+
+  --radius: 10px !important; --radius-sm: 6px !important; --radius-md: 10px !important;
+  --radius-lg: 14px !important; --radius-xl: 18px !important; --radius-full: 9999px !important;
+}
+
+/* ── Light mode (春桃) ── */
+:root[data-theme-mode=light],
+[data-theme-mode=light] {
+  --bg:          #fdf5f0 !important;
+  --bg-accent:   #f8ede5 !important;
+  --bg-elevated: #fff !important;
+  --bg-hover:    #f2e4da !important;
+  --bg-muted:    #f5ebe2 !important;
+  --bg-content:  #faf0e8 !important;
+
+  --card:            rgba(255,255,255,0.85) !important;
+  --card-foreground: #4a3a3f !important;
+  --card-highlight:  rgba(201, 92, 114, 0.05) !important;
+
+  --popover:            rgba(255,255,255,0.95) !important;
+  --popover-foreground: #4a3a3f !important;
+
+  --panel:        #fdf5f0 !important;
+  --panel-strong: #f8ede5 !important;
+  --panel-hover:  #f2e4da !important;
+
+  --chrome:        #fdf5f0f5 !important;
+  --chrome-strong: #fdf5f0fa !important;
+
+  --text:        #4a3a3f !important;
+  --text-strong: #2a1a1f !important;
+  --chat-text:   #4a3a3f !important;
+
+  --muted:            #a0909a !important;
+  --muted-strong:     #807078 !important;
+  --muted-foreground: #a0909a !important;
+
+  --border:        #e8d8d0 !important;
+  --border-strong: #d8c8c0 !important;
+  --border-hover:  #c0aaa2 !important;
+
+  --input: #f2e4da !important;
+  --ring:  #c95c72 !important;
+
+  --accent:            #c95c72 !important;
+  --accent-hover:      #b5485e !important;
+  --accent-muted:      #c95c72cc !important;
+  --accent-subtle:     rgba(201, 92, 114, 0.10) !important;
+  --accent-foreground: #fff !important;
+  --accent-glow:       rgba(201, 92, 114, 0.15) !important;
+
+  --primary:            #c95c72 !important;
+  --primary-foreground: #fff !important;
+
+  --secondary:            #f8ede5 !important;
+  --secondary-foreground: #4a3a3f !important;
+
+  --accent-2:        #9a6fb0 !important;
+  --accent-2-muted:  #9a6fb0b3 !important;
+  --accent-2-subtle: rgba(154, 111, 176, 0.10) !important;
+
+  --ok:        #3a9a65 !important;
+  --ok-muted:  #3a9a65bf !important;
+  --ok-subtle: rgba(58, 154, 101, 0.08) !important;
+
+  --destructive:            #c04555 !important;
+  --destructive-foreground: #fff !important;
+
+  --warn:        #c09030 !important;
+  --warn-muted:  #c09030bf !important;
+  --warn-subtle: rgba(192, 144, 48, 0.08) !important;
+
+  --danger:        #c04555 !important;
+  --danger-muted:  #c04555bf !important;
+  --danger-subtle: rgba(192, 69, 85, 0.08) !important;
+
+  --info: #4a8ab5 !important;
+
+  --focus:      rgba(201, 92, 114, 0.12) !important;
+  --focus-ring: 0 0 0 2px #fdf5f0, 0 0 0 3px rgba(201, 92, 114, 0.5) !important;
+  --focus-glow: 0 0 0 2px #fdf5f0, 0 0 0 3px #c95c72, 0 0 14px rgba(201, 92, 114, 0.10) !important;
+
+  --grid-line: rgba(0,0,0,0.04) !important;
+
+  --shadow-sm:   0 1px 2px rgba(0,0,0,0.06) !important;
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.08) !important;
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.10) !important;
+  --shadow-xl:   0 16px 48px rgba(0,0,0,0.12) !important;
+  --shadow-glow: 0 0 20px rgba(201, 92, 114, 0.06) !important;
+}
+
+/* ── Body ── */
+body {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(232, 137, 158, 0.06), transparent 50%),
+    radial-gradient(ellipse at 80% 85%, rgba(201, 160, 220, 0.05), transparent 45%),
+    linear-gradient(175deg, #221a22 0%, #2a1f2c 50%, #221a22 100%) !important;
+  background-attachment: fixed !important;
+}
+[data-theme-mode=light] body,
+[data-theme-mode=light] {
+  background:
+    radial-gradient(ellipse at 25% 5%, rgba(201, 92, 114, 0.06), transparent 50%),
+    radial-gradient(ellipse at 75% 90%, rgba(154, 111, 176, 0.04), transparent 45%),
+    linear-gradient(175deg, #fdf5f0 0%, #f8ede5 50%, #fdf5f0 100%) !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(232, 137, 158, 0.20); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(232, 137, 158, 0.35); }
+
+/* ── Cards ── */
+[class*="card"], [class*="Card"], [class*="panel"], [class*="Panel"], article {
+  backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--border) !important; transition: border-color 0.3s, box-shadow 0.3s !important;
+}
+[class*="card"]:hover, [class*="Card"]:hover, [class*="panel"]:hover, [class*="Panel"]:hover {
+  border-color: var(--border-strong) !important;
+  box-shadow: 0 0 20px rgba(232, 137, 158, 0.05) !important;
+}
+
+button:hover, [role="button"]:hover { box-shadow: 0 0 10px rgba(232, 137, 158, 0.08) !important; }
+button:active, [role="button"]:active { transform: scale(0.97) !important; }
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--border-hover) !important;
+  box-shadow: 0 0 8px rgba(232, 137, 158, 0.10) !important; outline: none !important;
+}
+
+a:hover { text-shadow: 0 0 6px rgba(232, 137, 158, 0.20) !important; }
+::selection { background: rgba(232, 137, 158, 0.20) !important; }
+
+tr:hover td, [class*="row"]:hover, [class*="Row"]:hover { background: rgba(232, 137, 158, 0.04) !important; }
+
+pre { background: rgba(34, 26, 34, 0.6) !important; border: 1px solid var(--border) !important; border-radius: 10px !important; }
+[data-theme-mode=light] pre { background: rgba(0,0,0,0.03) !important; }
+
+nav, [class*="sidebar"], [class*="Sidebar"], aside { border-right-color: var(--border) !important; }
+
+[class*="modal"], [class*="Modal"], [class*="dialog"], [class*="Dialog"],
+[class*="overlay"], [class*="Overlay"] { backdrop-filter: blur(16px) !important; }
+
+hr, [class*="divider"], [class*="Divider"], [class*="separator"], [class*="Separator"] {
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent) !important; border-color: transparent !important;
+}
+
+nav a[class*="active"], nav [class*="active"] {
+  border-left: 3px solid var(--accent) !important; background: var(--accent-subtle) !important;
+}
+
+[role="tab"][aria-selected="true"] { color: var(--accent) !important; border-bottom-color: var(--accent) !important; }
+
+[role="menu"], [role="listbox"], [class*="dropdown"], [class*="Dropdown"] {
+  background: var(--popover) !important; border: 1px solid var(--border) !important; backdrop-filter: blur(16px) !important;
+}
+
+[role="switch"][aria-checked="true"] {
+  background: var(--accent) !important; box-shadow: 0 0 8px rgba(232, 137, 158, 0.25) !important;
+}

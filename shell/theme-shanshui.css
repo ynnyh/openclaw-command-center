@@ -1,0 +1,278 @@
+/* ═══ 山水仙境 — Shanshui Xianxia ═══ */
+
+/* ── Dark mode (夜墨) ── */
+:root, :host, html {
+  --bg:          #1a1f2a !important;
+  --bg-accent:   #1f2536 !important;
+  --bg-elevated: #252c3e !important;
+  --bg-hover:    #2c3448 !important;
+  --bg-muted:    #1e2432 !important;
+  --bg-content:  #1c2230 !important;
+
+  --card:            rgba(31, 37, 54, 0.80) !important;
+  --card-foreground: #e5e2d8 !important;
+  --card-highlight:  rgba(111, 196, 168, 0.05) !important;
+
+  --popover:            rgba(31, 37, 54, 0.94) !important;
+  --popover-foreground: #e5e2d8 !important;
+
+  --panel:        #1a1f2a !important;
+  --panel-strong: #1f2536 !important;
+  --panel-hover:  #2c3448 !important;
+
+  --chrome:        #1a1f2af2 !important;
+  --chrome-strong: #1a1f2afa !important;
+
+  --text:        #e5e2d8 !important;
+  --text-strong: #f5f2ea !important;
+  --chat-text:   #e5e2d8 !important;
+
+  --muted:            #7a8090 !important;
+  --muted-strong:     #5a6070 !important;
+  --muted-foreground: #7a8090 !important;
+
+  --border:        rgba(111, 196, 168, 0.10) !important;
+  --border-strong: rgba(111, 196, 168, 0.20) !important;
+  --border-hover:  rgba(111, 196, 168, 0.35) !important;
+
+  --input: rgba(111, 196, 168, 0.07) !important;
+  --ring:  #6fc4a8 !important;
+
+  --accent:            #6fc4a8 !important;
+  --accent-hover:      #8ad4bc !important;
+  --accent-muted:      #6fc4a8cc !important;
+  --accent-subtle:     rgba(111, 196, 168, 0.10) !important;
+  --accent-foreground: #1a1f2a !important;
+  --accent-glow:       rgba(111, 196, 168, 0.20) !important;
+
+  --primary:            #6fc4a8 !important;
+  --primary-foreground: #1a1f2a !important;
+
+  --secondary:            #252c3e !important;
+  --secondary-foreground: #e5e2d8 !important;
+
+  --accent-2:        #c4a25a !important;
+  --accent-2-muted:  #c4a25ab3 !important;
+  --accent-2-subtle: rgba(196, 162, 90, 0.10) !important;
+
+  --ok:        #6fc4a8 !important;
+  --ok-muted:  #6fc4a8bf !important;
+  --ok-subtle: rgba(111, 196, 168, 0.08) !important;
+
+  --destructive:            #d4645a !important;
+  --destructive-foreground: #fff !important;
+
+  --warn:        #c4a25a !important;
+  --warn-muted:  #c4a25abf !important;
+  --warn-subtle: rgba(196, 162, 90, 0.08) !important;
+
+  --danger:        #d4645a !important;
+  --danger-muted:  #d4645abf !important;
+  --danger-subtle: rgba(212, 100, 90, 0.08) !important;
+
+  --info: #6aaed4 !important;
+
+  --focus:      rgba(111, 196, 168, 0.15) !important;
+  --focus-ring: 0 0 0 2px #1a1f2a, 0 0 0 3px rgba(111, 196, 168, 0.5) !important;
+  --focus-glow: 0 0 0 2px #1a1f2a, 0 0 0 3px #6fc4a8, 0 0 14px rgba(111, 196, 168, 0.12) !important;
+
+  --grid-line: rgba(111, 196, 168, 0.04) !important;
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.4) !important;
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.45) !important;
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.5) !important;
+  --shadow-xl:   0 16px 48px rgba(0,0,0,0.6) !important;
+  --shadow-glow: 0 0 20px rgba(111, 196, 168, 0.08) !important;
+
+  --font-display: 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif !important;
+  --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif !important;
+  --mono:         'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace !important;
+
+  --radius: 8px !important; --radius-sm: 4px !important; --radius-md: 8px !important;
+  --radius-lg: 12px !important; --radius-xl: 16px !important; --radius-full: 9999px !important;
+}
+
+/* ── Light mode (宣纸白昼) ── */
+:root[data-theme-mode=light],
+[data-theme-mode=light] {
+  --bg:          #f5f0e6 !important;
+  --bg-accent:   #efe9dc !important;
+  --bg-elevated: #fff !important;
+  --bg-hover:    #e8e0d2 !important;
+  --bg-muted:    #ece5d8 !important;
+  --bg-content:  #f0eadd !important;
+
+  --card:            rgba(255,255,255,0.85) !important;
+  --card-foreground: #3a3530 !important;
+  --card-highlight:  rgba(45, 125, 107, 0.05) !important;
+
+  --popover:            rgba(255,255,255,0.95) !important;
+  --popover-foreground: #3a3530 !important;
+
+  --panel:        #f5f0e6 !important;
+  --panel-strong: #efe9dc !important;
+  --panel-hover:  #e8e0d2 !important;
+
+  --chrome:        #f5f0e6f5 !important;
+  --chrome-strong: #f5f0e6fa !important;
+
+  --text:        #3a3530 !important;
+  --text-strong: #1a1815 !important;
+  --chat-text:   #3a3530 !important;
+
+  --muted:            #9a9488 !important;
+  --muted-strong:     #7a756a !important;
+  --muted-foreground: #9a9488 !important;
+
+  --border:        #ddd5c8 !important;
+  --border-strong: #ccc4b5 !important;
+  --border-hover:  #aa9e90 !important;
+
+  --input: #e8e0d2 !important;
+  --ring:  #2d7d6b !important;
+
+  --accent:            #2d7d6b !important;
+  --accent-hover:      #25695a !important;
+  --accent-muted:      #2d7d6bcc !important;
+  --accent-subtle:     rgba(45, 125, 107, 0.10) !important;
+  --accent-foreground: #fff !important;
+  --accent-glow:       rgba(45, 125, 107, 0.15) !important;
+
+  --primary:            #2d7d6b !important;
+  --primary-foreground: #fff !important;
+
+  --secondary:            #efe9dc !important;
+  --secondary-foreground: #3a3530 !important;
+
+  --accent-2:        #b8860b !important;
+  --accent-2-muted:  #b8860bb3 !important;
+  --accent-2-subtle: rgba(184, 134, 11, 0.10) !important;
+
+  --ok:        #2d8a5a !important;
+  --ok-muted:  #2d8a5abf !important;
+  --ok-subtle: rgba(45, 138, 90, 0.08) !important;
+
+  --destructive:            #c0453a !important;
+  --destructive-foreground: #fff !important;
+
+  --warn:        #b8860b !important;
+  --warn-muted:  #b8860bbf !important;
+  --warn-subtle: rgba(184, 134, 11, 0.08) !important;
+
+  --danger:        #c0453a !important;
+  --danger-muted:  #c0453abf !important;
+  --danger-subtle: rgba(192, 69, 58, 0.08) !important;
+
+  --info: #3a7dad !important;
+
+  --focus:      rgba(45, 125, 107, 0.12) !important;
+  --focus-ring: 0 0 0 2px #f5f0e6, 0 0 0 3px rgba(45, 125, 107, 0.5) !important;
+  --focus-glow: 0 0 0 2px #f5f0e6, 0 0 0 3px #2d7d6b, 0 0 14px rgba(45, 125, 107, 0.10) !important;
+
+  --grid-line: rgba(0,0,0,0.04) !important;
+
+  --shadow-sm:   0 1px 2px rgba(0,0,0,0.06) !important;
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.08) !important;
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.10) !important;
+  --shadow-xl:   0 16px 48px rgba(0,0,0,0.12) !important;
+  --shadow-glow: 0 0 20px rgba(45, 125, 107, 0.06) !important;
+}
+
+/* ── Body backgrounds ── */
+body {
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(111, 196, 168, 0.06), transparent 50%),
+    radial-gradient(ellipse at 85% 80%, rgba(196, 162, 90, 0.04), transparent 45%),
+    linear-gradient(175deg, #1a1f2a 0%, #1f2536 50%, #1a1f2a 100%) !important;
+  background-attachment: fixed !important;
+}
+[data-theme-mode=light] body,
+[data-theme-mode=light] {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(45, 125, 107, 0.06), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(184, 134, 11, 0.04), transparent 45%),
+    linear-gradient(175deg, #f5f0e6 0%, #efe9dc 50%, #f5f0e6 100%) !important;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(111, 196, 168, 0.20); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(111, 196, 168, 0.35); }
+
+/* ── Cards glass ── */
+[class*="card"], [class*="Card"], [class*="panel"], [class*="Panel"], article {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid var(--border) !important;
+  transition: border-color 0.3s, box-shadow 0.3s !important;
+}
+[class*="card"]:hover, [class*="Card"]:hover, [class*="panel"]:hover, [class*="Panel"]:hover {
+  border-color: var(--border-strong) !important;
+  box-shadow: 0 0 20px rgba(111, 196, 168, 0.05) !important;
+}
+
+/* ── Buttons ── */
+button:hover, [role="button"]:hover { box-shadow: 0 0 10px rgba(111, 196, 168, 0.08) !important; }
+button:active, [role="button"]:active { transform: scale(0.97) !important; }
+
+/* ── Inputs ── */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--border-hover) !important;
+  box-shadow: 0 0 8px rgba(111, 196, 168, 0.10) !important;
+  outline: none !important;
+}
+
+/* ── Links ── */
+a:hover { text-shadow: 0 0 6px rgba(111, 196, 168, 0.20) !important; }
+
+/* ── Selection ── */
+::selection { background: rgba(111, 196, 168, 0.20) !important; }
+
+/* ── Tables ── */
+tr:hover td, [class*="row"]:hover, [class*="Row"]:hover {
+  background: rgba(111, 196, 168, 0.04) !important;
+}
+
+/* ── Code ── */
+pre { background: rgba(26, 31, 42, 0.6) !important; border: 1px solid var(--border) !important; border-radius: 8px !important; }
+[data-theme-mode=light] pre { background: rgba(0,0,0,0.03) !important; }
+
+/* ── Sidebar ── */
+nav, [class*="sidebar"], [class*="Sidebar"], aside {
+  border-right-color: var(--border) !important;
+}
+
+/* ── Modals ── */
+[class*="modal"], [class*="Modal"], [class*="dialog"], [class*="Dialog"],
+[class*="overlay"], [class*="Overlay"] {
+  backdrop-filter: blur(16px) !important;
+}
+
+/* ── Dividers ── */
+hr, [class*="divider"], [class*="Divider"], [class*="separator"], [class*="Separator"] {
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent) !important;
+  border-color: transparent !important;
+}
+
+/* ── Nav active ── */
+nav a[class*="active"], nav [class*="active"] {
+  border-left: 3px solid var(--accent) !important;
+  background: var(--accent-subtle) !important;
+}
+
+/* ── Tabs active ── */
+[role="tab"][aria-selected="true"] { color: var(--accent) !important; border-bottom-color: var(--accent) !important; }
+
+/* ── Dropdowns ── */
+[role="menu"], [role="listbox"], [class*="dropdown"], [class*="Dropdown"] {
+  background: var(--popover) !important;
+  border: 1px solid var(--border) !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+/* ── Toggles ── */
+[role="switch"][aria-checked="true"] {
+  background: var(--accent) !important;
+  box-shadow: 0 0 8px rgba(111, 196, 168, 0.25) !important;
+}

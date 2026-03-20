@@ -1,0 +1,104 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mission Control 鎬昏</title>
+    <link rel="stylesheet" href="./assets/mission-control-overview.css" />
+    <script type="module" crossorigin src="./assets/{{OPENCLAW_INDEX_JS}}"></script>
+  </head>
+  <body>
+    <div class="mco-wrap">
+      <section class="mco-hero mco-card">
+        <div>
+          <p class="mco-eyebrow">Mission Control Overview</p>
+          <h1>鐪熷疄鎬昏椤靛凡缁忚惤杩?18789</h1>
+          <p class="mco-lede">
+            杩欓〉鐜板湪涓嶅彧璇?`/healthz`锛屼篃浼氬皾璇曞鐢ㄥ綋鍓嶆帶鍒跺彴鐨勭綉鍏宠繛鎺ワ紝鎷変細璇濄€佺敤閲忓拰瀹夸富鏈?helper 蹇収銆傚悗闈㈢户缁線閲屾帴锛屽氨鑳戒粠鈥滃仴搴锋€昏鈥濆彉鎴愮湡姝ｇ殑杩愯惀鎬绘帶椤点€?          </p>
+          <div class="mco-actions">
+            <a class="mco-btn" href="/">杩斿洖涓绘帶鍒跺彴</a>
+            <a class="mco-btn" href="/mission-control.html">杩斿洖棰勮鍏ュ彛</a>
+            <button class="mco-btn mco-btn-primary" id="refreshBtn" type="button">鍒锋柊鎬昏</button>
+          </div>
+        </div>
+        <div class="mco-stats">
+          <div class="mco-stat"><span>Gateway 鍋ュ悍</span><strong id="gatewayStatus">鍔犺浇涓?/strong></div>
+          <div class="mco-stat"><span>鏁版嵁鏃堕棿</span><strong id="generatedAt">--</strong></div>
+          <div class="mco-stat"><span>褰撳墠缁撹</span><strong id="summaryStatus">姝ｅ湪妫€鏌?/strong></div>
+        </div>
+      </section>
+
+      <section class="mco-card mco-connect">
+        <div class="mco-connect-copy">
+          <p class="mco-eyebrow">Gateway Runtime</p>
+          <h2>缃戝叧鎺ュ叆</h2>
+          <p>
+            榛樿鐩存帴澶嶇敤褰撳墠娴忚鍣ㄩ噷淇濆瓨鐨?18789 token銆?            濡傛灉杩欓噷鏄剧ず鏈帴鍏ワ紝鍙互鎵嬪姩琛?token 鍐嶅埛鏂版€昏銆?          </p>
+        </div>
+        <div class="mco-connect-controls">
+          <label class="mco-connect-field" for="gatewayTokenInput">
+            <span>Gateway Token</span>
+            <input id="gatewayTokenInput" type="password" placeholder="OPENCLAW_GATEWAY_TOKEN" autocomplete="off" />
+          </label>
+          <div class="mco-connect-actions">
+            <button class="mco-btn" id="saveTokenBtn" type="button">淇濆瓨 Token</button>
+            <button class="mco-btn mco-btn-primary" id="connectBtn" type="button">杩炴帴骞跺埛鏂?/button>
+          </div>
+        </div>
+        <div class="mco-connect-meta">
+          <span class="mco-badge mco-badge-warn" id="gatewayBadge">缃戝叧鏈帴鍏?/span>
+          <span class="mco-badge mco-badge-warn" id="helperBadge">Helper 鏈帴鍏?/span>
+          <span class="mco-badge mco-badge-info" id="helperBaseBadge">ws://127.0.0.1:3211/ws</span>
+        </div>
+      </section>
+
+      <section class="mco-grid mco-grid-main">
+        <article class="mco-card mco-panel">
+          <p class="mco-eyebrow">Health</p>
+          <h2>绯荤粺鍋ュ悍</h2>
+          <div class="mco-kv" id="healthGrid"></div>
+        </article>
+
+        <article class="mco-card mco-panel">
+          <p class="mco-eyebrow">Sessions</p>
+          <h2>浼氳瘽瑙嗗浘</h2>
+          <div class="mco-kv" id="sessionSummary"></div>
+          <div class="mco-list" id="sessionList"></div>
+        </article>
+
+        <article class="mco-card mco-panel">
+          <p class="mco-eyebrow">Usage</p>
+          <h2>鐢ㄩ噺瑙嗗浘</h2>
+          <div class="mco-kv" id="usageSummary"></div>
+          <div class="mco-list" id="usageList"></div>
+        </article>
+      </section>
+
+      <section class="mco-grid mco-grid-secondary">
+        <article class="mco-card mco-panel">
+          <p class="mco-eyebrow">Staff Board</p>
+          <h2>杩愯甯綅</h2>
+          <div class="mco-kv" id="serviceSummary"></div>
+          <div class="mco-list" id="serviceList"></div>
+        </article>
+
+        <article class="mco-card mco-panel">
+          <p class="mco-eyebrow">Debug</p>
+          <h2>鍘熷蹇収</h2>
+          <div class="mco-item">
+            <strong>褰撳墠鍚堟垚蹇収</strong>
+            <p class="mco-footer">杩欓噷浼氭妸 `/healthz`銆丟ateway 浼氳瘽鎽樿鍜?helper 缁撴灉鎷兼垚涓€涓彧璇昏皟璇曡鍥俱€?/p>
+          </div>
+          <pre id="rawData" class="mco-item mco-mono mco-raw-data">鍔犺浇涓?..</pre>
+        </article>
+      </section>
+    </div>
+
+    <div class="mco-runtime-host" hidden aria-hidden="true">
+      <openclaw-app id="overviewGatewayApp"></openclaw-app>
+    </div>
+
+    <script src="./assets/mission-control-overview.js"></script>
+  </body>
+</html>
+

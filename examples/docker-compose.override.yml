@@ -1,0 +1,4 @@
+services:
+  openclaw:
+    volumes:
+      - ./custom-ui:/custom-ui

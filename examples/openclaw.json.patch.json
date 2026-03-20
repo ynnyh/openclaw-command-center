@@ -1,0 +1,7 @@
+{
+  "gateway": {
+    "controlUi": {
+      "root": "/custom-ui"
+    }
+  }
+}
