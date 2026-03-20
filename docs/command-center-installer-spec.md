@@ -35,7 +35,7 @@
 - `-EnableAutostart`
   - 安装后注册 helper 开机自启动
 - `-WriteDockerOverride`
-  - 生成 `docker-compose.override.yml`
+  - 生成 `docker-compose.command-center.override.yml`
 - `-WriteEnvExample`
   - 在目标目录生成或更新 `.env.example`
 - `-Force`
@@ -90,7 +90,7 @@
 
 - `<OpenClawRoot>/docker-compose.command-center.override.yml`
 
-建议不要默认直接覆盖用户的 `docker-compose.override.yml`
+建议不要默认直接覆盖用户的 `docker-compose.command-center.override.yml`
 
 ### 5. Config patch
 

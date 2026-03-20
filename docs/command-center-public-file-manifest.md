@@ -43,8 +43,8 @@
 
 建议新增：
 
-- `examples/docker-compose.override.yml`
-- `examples/openclaw.json.patch.json`
+- `examples/docker-compose.command-center.override.yml`
+- `examples/openclaw.command-center.patch.json`
 
 ### Docs
 
@@ -127,8 +127,8 @@ open-claw-office/.env.example   -> openclaw-command-center/.env.example
 openclaw-command-center/install.ps1
 openclaw-command-center/LICENSE
 openclaw-command-center/CHANGELOG.md
-openclaw-command-center/examples/docker-compose.override.yml
-openclaw-command-center/examples/openclaw.json.patch.json
+openclaw-command-center/examples/docker-compose.command-center.override.yml
+openclaw-command-center/examples/openclaw.command-center.patch.json
 ```
 
 ## Migration Checklist
@@ -155,8 +155,8 @@ openclaw-command-center/examples/openclaw.json.patch.json
 - `scripts/command-center-helper.mjs`
 - `scripts/ensure-command-center-helper.ps1`
 - `scripts/install-command-center-helper-autostart.ps1`
-- `examples/docker-compose.override.yml`
-- `examples/openclaw.json.patch.json`
+- `examples/docker-compose.command-center.override.yml`
+- `examples/openclaw.command-center.patch.json`
 
 ## Final Answer: What You Need To Create
 

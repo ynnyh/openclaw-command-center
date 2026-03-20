@@ -322,7 +322,7 @@ if ($DryRun) {
   }
 
   Write-Utf8NoBom -Path $PatchFile -Content ($PatchJson + "`r`n")
-  Write-Ok 'Rendered command center UI and copied helper scripts'
+  Write-Ok 'Rendered the control UI overlay and copied helper scripts'
 }
 
 if ($WriteDockerOverride) {
@@ -370,7 +370,7 @@ if ($EnableAutostart) {
 }
 
 Write-Host ''
-Write-Host 'OpenClaw Command Center install summary' -ForegroundColor Green
+Write-Host 'OpenClaw Command Center overlay install summary' -ForegroundColor Green
 Write-Host ("  OpenClaw root: {0}" -f $OpenClawRoot)
 Write-Host ("  Compose file:   {0}" -f $composeFile)
 Write-Host ("  Container:      {0}" -f $Container)

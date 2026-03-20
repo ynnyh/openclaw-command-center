@@ -68,8 +68,8 @@ openclaw-command-center/
   install.ps1
   uninstall.ps1
   examples/
-    docker-compose.override.yml
-    openclaw.json.patch.json
+    docker-compose.command-center.override.yml
+    openclaw.command-center.patch.json
   custom-ui/
     index.html
     mission-control.html
@@ -133,7 +133,7 @@ openclaw-command-center/
 1. 检查目标目录中是否存在 OpenClaw 部署结构
 2. 复制 `custom-ui/` 到目标目录
 3. 复制 helper 脚本到目标目录
-4. 输出或生成一份 `docker-compose.override.yml`
+4. 输出或生成一份 `docker-compose.command-center.override.yml`
 5. 提示用户在 `openclaw.json` 中加入 `gateway.controlUi.root=/custom-ui`
 6. 提示或执行 helper 启动
 7. 提示或执行容器重启
@@ -165,12 +165,12 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 3. 脚本询问或读取：
    - OpenClaw 根目录
    - 是否启用 helper 自启动
-   - 是否生成 `docker-compose.override.yml`
+   - 是否生成 `docker-compose.command-center.override.yml`
 
 4. 脚本完成：
    - 拷贝 `custom-ui/`
    - 拷贝 `scripts/`
-   - 生成 `examples/docker-compose.override.yml` 的本地副本
+   - 生成 `examples/docker-compose.command-center.override.yml` 的本地副本
    - 输出需要合并到 `openclaw.json` 的 patch
 
 5. 用户执行：

@@ -62,8 +62,8 @@ COMMAND_CENTER_HELPER_PORT=3211
 - `scripts/command-center-helper.mjs`
 - `scripts/ensure-command-center-helper.ps1`
 - `scripts/install-command-center-helper-autostart.ps1`
-- `examples/docker-compose.override.yml`
-- `examples/openclaw.json.patch.json`
+- `examples/docker-compose.command-center.override.yml`
+- `examples/openclaw.command-center.patch.json`
 
 ## Manual Integration
 

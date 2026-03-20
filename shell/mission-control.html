@@ -1,88 +1,87 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mission Control 预览入口</title>
+    <title>Mission Control Entry</title>
     <link rel="stylesheet" href="./assets/mission-control-preview.css" />
   </head>
   <body>
     <div class="mc-wrap">
       <section class="mc-hero mc-card">
         <div>
-          <p class="mc-eyebrow">Mission Control Preview</p>
-          <h1>新控制台入口已经挂进 18789 了</h1>
+          <p class="mc-eyebrow">OpenClaw Control UI Overlay</p>
+          <h1>Mission Control pages are mounted</h1>
           <p class="mc-lede">
-            这个页面先作为排查功能的统一入口。当前 GitHub 项目
-            <code>openclaw-control-center</code>
-            还是独立 Node 应用，没法原样直接替掉 Gateway 内建 UI，所以这里先放一个正式入口、状态说明和视觉基线。
+            This repository ships a UI overlay for an existing OpenClaw deployment. It wraps the native
+            control UI, adds the Mission Control overview pages, and can optionally connect to a host-side
+            helper for diagnostics.
           </p>
           <div class="mc-actions">
-            <a class="mc-btn mc-btn-primary" href="/mission-control-overview.html">打开真实总览页</a>
-            <a class="mc-btn mc-btn-secondary" href="/">返回当前控制台</a>
-            <a class="mc-btn mc-btn-secondary" href="/docs/readme?lang=zh">查看现有文档</a>
+            <a class="mc-btn mc-btn-primary" href="/mission-control-overview.html">Open overview page</a>
+            <a class="mc-btn mc-btn-secondary" href="/">Open wrapped control UI</a>
+            <button class="mc-btn mc-btn-secondary" type="button" onclick="window.location.reload()">Reload</button>
           </div>
           <div class="mc-hint">
-            当前状态：<strong>入口已接入</strong>，但
-            <strong>完整 Mission Control 还未被静态化嵌入 Gateway</strong>。
-            现在可以先在这里确认目标界面、结构方向和后续接线策略，再决定是走反代桥接还是静态前端改造。
+            Use this page to confirm that the overlay assets are mounted correctly before testing gateway
+            connectivity or helper-backed diagnostics.
           </div>
         </div>
         <div class="mc-status-grid">
           <div class="mc-status-item">
-            <span>入口位置</span>
+            <span>Entry route</span>
             <strong><code>/mission-control.html</code></strong>
           </div>
           <div class="mc-status-item">
-            <span>当前接入形态</span>
-            <strong>18789 内静态入口页</strong>
+            <span>Overlay type</span>
+            <strong>OpenClaw control UI overlay</strong>
           </div>
           <div class="mc-status-item">
-            <span>GitHub 项目状态</span>
-            <strong>已拉取 / 已构建 / 已测试</strong>
+            <span>Native runtime</span>
+            <strong>Reused from your running OpenClaw container</strong>
           </div>
           <div class="mc-status-item">
-            <span>后续方向</span>
-            <strong>桥接接入 or 静态化改造</strong>
+            <span>Helper</span>
+            <strong>Optional host-side diagnostics process</strong>
           </div>
         </div>
       </section>
 
       <section class="mc-grid">
         <article class="mc-card mc-panel">
-          <p class="mc-eyebrow">你现在能看什么</p>
-          <h2>预览图 + 落地状态</h2>
+          <p class="mc-eyebrow">Current preview assets</p>
+          <h2>Shipped overlay views</h2>
           <div class="mc-preview">
             <div class="mc-shot">
-              <img src="./mission-control-assets/overview-hero-zh.png" alt="Mission Control 总览预览" />
+              <img src="./mission-control-assets/overview-hero-zh.png" alt="Overview page preview" />
             </div>
             <div class="mc-shot">
-              <img src="./mission-control-assets/token-share-zh.png" alt="Mission Control 用量预览" />
+              <img src="./mission-control-assets/token-share-zh.png" alt="Usage page preview" />
             </div>
             <div class="mc-shot">
-              <img src="./mission-control-assets/staff-zh.png" alt="Mission Control 员工预览" />
+              <img src="./mission-control-assets/staff-zh.png" alt="Staff board preview" />
             </div>
           </div>
         </article>
 
         <article class="mc-card mc-panel">
-          <p class="mc-eyebrow">落地说明</p>
-          <h2>接线现状</h2>
+          <p class="mc-eyebrow">Integration notes</p>
+          <h2>What this package changes</h2>
           <div class="mc-meta-list">
             <div class="mc-meta-item">
-              <strong>已完成：</strong>仓库拉取、依赖安装、构建通过、测试通过、UI smoke 通过。
+              <strong>Wraps:</strong> the native OpenClaw control UI entry at <code>/</code>
             </div>
             <div class="mc-meta-item">
-              <strong>已确认：</strong>这个项目不是现成的 Gateway 内建静态控制台替换包，而是独立 Node HTTP 应用。
+              <strong>Adds:</strong> <code>/mission-control.html</code> and <code>/mission-control-overview.html</code>
             </div>
             <div class="mc-meta-item">
-              <strong>当前做法：</strong>先在 <code>18789</code> 内给一个正式入口，避免再被容器端口映射卡死。
+              <strong>Generates:</strong> a mountable <code>custom-ui</code> directory for <code>/custom-ui</code>
             </div>
             <div class="mc-meta-item">
-              <strong>下一步可选：</strong>1）做反向代理桥接；2）把项目改造成可直接挂进 Gateway 的静态前端。
+              <strong>Does not replace:</strong> the OpenClaw backend or gateway
             </div>
             <div class="mc-meta-item">
-              <strong>风险边界：</strong>当前没有打开高风险 mutation，仍保持只读、安全优先。
+              <strong>Optionally includes:</strong> a host-side helper for diagnostics and service visibility
             </div>
           </div>
         </article>

@@ -20,7 +20,7 @@ die()   { echo -e "${RED}[ERR]${NC}  $*" >&2; exit 1; }
 
 usage() {
   cat <<'EOF'
-OpenClaw Command Center installer
+OpenClaw Command Center overlay builder
 
 Usage:
   ./install.sh [options]
@@ -32,7 +32,7 @@ Options:
 
 Examples:
   ./install.sh
-  ./install.sh -c david -o /path/to/openclaw/custom-ui
+  ./install.sh -c openclaw -o /path/to/openclaw/custom-ui
 EOF
 }
 
@@ -162,8 +162,9 @@ Detected OpenClaw version:
 
 Next steps:
   1. Mount this directory to /custom-ui in your OpenClaw container.
-  2. Merge examples/openclaw.json.patch.json into your OpenClaw config.
-  3. Restart the deployment.
-  4. If you want host diagnostics, run scripts/command-center-helper.mjs
+  2. Merge examples/openclaw.command-center.patch.json into your OpenClaw config.
+  3. Use examples/docker-compose.command-center.override.yml if you need a mount example.
+  4. Restart the deployment.
+  5. If you want host diagnostics, run scripts/command-center-helper.mjs
      or use the PowerShell helper bootstrap scripts on Windows.
 EOF
