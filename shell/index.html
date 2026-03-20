@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,19 +23,19 @@
           <span class="cc-logo-mark">M</span>
           <span class="cc-logo-copy">
             <strong>Mission Control</strong>
-            <em data-i18n="logo.subtitle">指挥部</em>
+            <em data-i18n="logo.subtitle">Control Center</em>
           </span>
         </button>
 
         <div class="cc-pilot-center">
           <div class="cc-model-switch">
             <div class="cc-model-head">
-              <span class="cc-label" data-i18n="pilot.model">模型</span>
-              <button id="cc-model-config" class="cc-action cc-action-small" type="button" data-i18n="pilot.modelConfig">配置模型</button>
+              <span class="cc-label" data-i18n="pilot.model">Model</span>
+              <button id="cc-model-config" class="cc-action cc-action-small" type="button" data-i18n="pilot.modelConfig">Configure</button>
             </div>
             <div class="cc-model-row">
               <select id="cc-model-select" class="cc-select">
-                <option value="">模型加载中...</option>
+                <option value="">Loading models...</option>
               </select>
             </div>
           </div>
@@ -43,16 +43,16 @@
 
         <div class="cc-pilot-side">
           <label class="cc-theme-switch">
-            <span class="cc-label" data-i18n="pilot.theme">主题</span>
+            <span class="cc-label" data-i18n="pilot.theme">Theme</span>
             <select id="cc-theme-select" class="cc-select cc-theme-select"></select>
           </label>
           <div class="cc-lang-switch" role="group" aria-label="language switcher">
-            <button id="cc-lang-zh" class="cc-lang-btn active" type="button">中文</button>
+            <button id="cc-lang-zh" class="cc-lang-btn active" type="button">ZH</button>
             <button id="cc-lang-en" class="cc-lang-btn" type="button">EN</button>
           </div>
-          <div id="cc-connection-badge" class="cc-badge cc-badge-warn">网关离线</div>
-          <div id="cc-helper-badge" class="cc-badge cc-badge-warn">Helper 离线</div>
-          <button id="cc-settings" class="cc-action" type="button" data-i18n="pilot.drawer">抽屉</button>
+          <div id="cc-connection-badge" class="cc-badge cc-badge-warn">Gateway offline</div>
+          <div id="cc-helper-badge" class="cc-badge cc-badge-warn">Helper offline</div>
+          <button id="cc-settings" class="cc-action" type="button" data-i18n="pilot.drawer">Drawer</button>
         </div>
       </header>
 
@@ -60,19 +60,19 @@
         <section class="cc-panel cc-results-panel">
           <div class="cc-panel-head">
             <div>
-              <p class="cc-eyebrow" data-i18n="results.eyebrow">结果流</p>
-              <h1 data-i18n="results.title">Markdown 直出，不要气泡</h1>
+              <p class="cc-eyebrow" data-i18n="results.eyebrow">Assistant stream</p>
+              <h1 data-i18n="results.title">Markdown output, no bubbles</h1>
             </div>
             <div class="cc-head-meta">
-              <span id="cc-session-pill" class="cc-pill">会话 --</span>
-              <span id="cc-model-pill" class="cc-pill">模型 --</span>
+              <span id="cc-session-pill" class="cc-pill">Session --</span>
+              <span id="cc-model-pill" class="cc-pill">Model --</span>
             </div>
           </div>
 
           <section id="cc-connect-block" class="cc-connect-block">
             <div class="cc-connect-copy">
-              <strong data-i18n="connect.title">连接网关</strong>
-              <span data-i18n="connect.copy">如果没有自动接入，请粘贴 Token。</span>
+              <strong data-i18n="connect.title">Connect gateway</strong>
+              <span data-i18n="connect.copy">Paste the gateway token if auto-connect did not attach.</span>
             </div>
             <div class="cc-connect-row">
               <input
@@ -82,14 +82,14 @@
                 placeholder="OPENCLAW_GATEWAY_TOKEN"
                 autocomplete="off"
               />
-              <button id="cc-save-token" class="cc-action" type="button" data-i18n="connect.save">保存</button>
-              <button id="cc-connect" class="cc-action cc-action-primary" type="button" data-i18n="connect.connect">连接</button>
+              <button id="cc-save-token" class="cc-action" type="button" data-i18n="connect.save">Save</button>
+              <button id="cc-connect" class="cc-action cc-action-primary" type="button" data-i18n="connect.connect">Connect</button>
             </div>
           </section>
 
           <section class="cc-result-block">
             <div class="cc-subhead">
-              <span class="cc-subtitle" data-i18n="results.final">最终输出</span>
+              <span class="cc-subtitle" data-i18n="results.final">Final output</span>
               <span id="cc-result-meta" class="cc-submeta"></span>
             </div>
             <div id="cc-final-output" class="cc-final-output"></div>
@@ -97,8 +97,8 @@
 
           <section class="cc-trace-block">
             <div class="cc-subhead">
-              <span class="cc-subtitle" data-i18n="results.trace">逻辑链</span>
-              <span id="cc-trace-meta" class="cc-submeta">0 条事件</span>
+              <span class="cc-subtitle" data-i18n="results.trace">Logic chain</span>
+              <span id="cc-trace-meta" class="cc-submeta">0 events</span>
             </div>
             <div id="cc-trace-feed" class="cc-trace-feed"></div>
           </section>
@@ -108,10 +108,10 @@
           <section class="cc-panel">
             <div class="cc-panel-head">
               <div>
-                <p class="cc-eyebrow" data-i18n="mcp.eyebrow">MCP 环境监控</p>
-                <h2 data-i18n="mcp.title">主机服务目录</h2>
+                <p class="cc-eyebrow" data-i18n="mcp.eyebrow">MCP environment</p>
+                <h2 data-i18n="mcp.title">Host services</h2>
               </div>
-              <button id="cc-helper-refresh" class="cc-action" type="button" data-i18n="common.refresh">刷新</button>
+              <button id="cc-helper-refresh" class="cc-action" type="button" data-i18n="common.refresh">Refresh</button>
             </div>
             <div id="cc-mcp-status" class="cc-list"></div>
           </section>
@@ -119,10 +119,10 @@
           <section id="cc-api-wall" class="cc-panel cc-api-wall">
             <div class="cc-panel-head">
               <div>
-                <p class="cc-eyebrow" data-i18n="api.eyebrow">API 诊断墙</p>
-                <h2 data-i18n="api.title">API 报错</h2>
+                <p class="cc-eyebrow" data-i18n="api.eyebrow">API diagnostics</p>
+                <h2 data-i18n="api.title">API errors</h2>
               </div>
-              <span id="cc-api-state" class="cc-pill">空闲</span>
+              <span id="cc-api-state" class="cc-pill">Idle</span>
             </div>
             <div id="cc-api-errors" class="cc-list"></div>
           </section>
@@ -130,8 +130,8 @@
           <section class="cc-panel">
             <div class="cc-panel-head">
               <div>
-                <p class="cc-eyebrow" data-i18n="token.eyebrow">Token 监控</p>
-                <h2 data-i18n="token.title">当前会话与今日累计</h2>
+                <p class="cc-eyebrow" data-i18n="token.eyebrow">Token monitor</p>
+                <h2 data-i18n="token.title">Session burn and daily burn</h2>
               </div>
             </div>
             <div id="cc-token-metrics" class="cc-metrics"></div>
@@ -144,21 +144,21 @@
     <aside id="cc-drawer" class="cc-drawer" aria-hidden="true">
       <div class="cc-drawer-head">
         <div>
-          <p class="cc-eyebrow" data-i18n="drawer.eyebrow">原生控制核心</p>
-          <h2 data-i18n="drawer.title">设置 / 模型 / 插件 / 日志</h2>
+          <p class="cc-eyebrow" data-i18n="drawer.eyebrow">Native control core</p>
+          <h2 data-i18n="drawer.title">Settings / models / plugins / logs</h2>
         </div>
-        <button id="cc-drawer-close" class="cc-action" type="button" data-i18n="common.close">关闭</button>
+        <button id="cc-drawer-close" class="cc-action" type="button" data-i18n="common.close">Close</button>
       </div>
 
       <div class="cc-drawer-tabs">
-        <button class="cc-tab active" data-drawer-tab="chat" data-i18n="drawer.tab.chat" type="button">聊天</button>
-        <button class="cc-tab" data-drawer-tab="config" data-i18n="drawer.tab.config" type="button">配置</button>
+        <button class="cc-tab active" data-drawer-tab="chat" data-i18n="drawer.tab.chat" type="button">Chat</button>
+        <button class="cc-tab" data-drawer-tab="config" data-i18n="drawer.tab.config" type="button">Config</button>
         <button class="cc-tab" data-drawer-tab="aiAgents" data-i18n="drawer.tab.ai" type="button">AI</button>
-        <button class="cc-tab" data-drawer-tab="skills" data-i18n="drawer.tab.skills" type="button">技能</button>
-        <button class="cc-tab" data-drawer-tab="automation" data-i18n="drawer.tab.automation" type="button">自动化</button>
-        <button class="cc-tab" data-drawer-tab="infrastructure" data-i18n="drawer.tab.infra" type="button">基础设施</button>
-        <button class="cc-tab" data-drawer-tab="logs" data-i18n="drawer.tab.logs" type="button">日志</button>
-        <button class="cc-tab" data-drawer-tab="debug" data-i18n="drawer.tab.debug" type="button">调试</button>
+        <button class="cc-tab" data-drawer-tab="skills" data-i18n="drawer.tab.skills" type="button">Skills</button>
+        <button class="cc-tab" data-drawer-tab="automation" data-i18n="drawer.tab.automation" type="button">Automation</button>
+        <button class="cc-tab" data-drawer-tab="infrastructure" data-i18n="drawer.tab.infra" type="button">Infra</button>
+        <button class="cc-tab" data-drawer-tab="logs" data-i18n="drawer.tab.logs" type="button">Logs</button>
+        <button class="cc-tab" data-drawer-tab="debug" data-i18n="drawer.tab.debug" type="button">Debug</button>
       </div>
 
       <div id="cc-easy-config" class="cc-easy-config" hidden></div>

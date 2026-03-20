@@ -1,0 +1,48 @@
+name: Smoke
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check Node syntax
+        run: |
+          node --check scripts/command-center-helper.mjs
+          node --check scripts/smoke-check.mjs
+          node --check shell/mission-control-shell.js
+          node --check shell/mission-control-overview.js
+
+      - name: Check Bash syntax
+        run: bash -n install.sh
+
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $files = @(
+            'install.ps1',
+            'scripts/ensure-command-center-helper.ps1',
+            'scripts/install-command-center-helper-autostart.ps1'
+          )
+          foreach ($file in $files) {
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path $file), [ref]$null, [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_.Message }
+              exit 1
+            }
+          }
+
+      - name: Run repository smoke check
+        run: node scripts/smoke-check.mjs
