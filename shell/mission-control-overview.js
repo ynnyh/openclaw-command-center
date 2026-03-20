@@ -1,7 +1,7 @@
 (function () {
   var GATEWAY_TOKEN_KEY = 'mission-control.gateway-token';
   var HELPER_BASE_KEY = 'command-center.helper-base';
-  var DEFAULT_HELPER_BASE = 'ws://127.0.0.1:3211/ws';
+  var DEFAULT_HELPER_PORT = '3211';
   var REFRESH_MS = 30000;
 
   var refs = {
@@ -45,11 +45,21 @@
     refreshTimer: null
   };
 
+  function defaultHelperBase() {
+    var host = '127.0.0.1';
+    try {
+      if (window.location && window.location.hostname) {
+        host = window.location.hostname;
+      }
+    } catch (error) {}
+    return 'ws://' + host + ':' + DEFAULT_HELPER_PORT + '/ws';
+  }
+
   function loadHelperBase() {
     try {
-      return localStorage.getItem(HELPER_BASE_KEY) || DEFAULT_HELPER_BASE;
+      return localStorage.getItem(HELPER_BASE_KEY) || defaultHelperBase();
     } catch (error) {
-      return DEFAULT_HELPER_BASE;
+      return defaultHelperBase();
     }
   }
 
@@ -312,7 +322,7 @@
   }
 
   function getHelperSocketUrl() {
-    var base = state.helperBase || DEFAULT_HELPER_BASE;
+    var base = state.helperBase || defaultHelperBase();
     if (/^https?:/i.test(base)) {
       base = base.replace(/^http/i, 'ws');
     }

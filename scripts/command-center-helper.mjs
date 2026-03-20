@@ -2,25 +2,14 @@
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { appendFileSync, createWriteStream, existsSync, mkdirSync, readFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const HOST = '127.0.0.1';
-const PORT = 3211;
 const WS_GUID = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11';
 const API_MARKER = '>>> [API Error Debug] <<<';
 const DIAGNOSTIC_LIMIT = 50;
-const ALLOWED_ORIGINS = new Set([
-  'http://127.0.0.1:18789',
-  'http://localhost:18789'
-]);
 
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)));
-const outputRoot = join(repoRoot, 'output', 'command-center');
-const serviceLogDir = join(outputRoot, 'service-logs');
-const diagnosticsLogFile = join(outputRoot, 'api-diagnostics.jsonl');
-
-mkdirSync(serviceLogDir, { recursive: true });
 
 function unquoteEnvValue(value) {
   const trimmed = String(value || '').trim();
@@ -65,27 +54,98 @@ function readSetting(name, fallback) {
   return fallback;
 }
 
+function readIntegerSetting(name, fallback) {
+  const raw = readSetting(name, '');
+  const parsed = Number.parseInt(raw, 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function readListSetting(name) {
+  const raw = readSetting(name, '');
+  if (!raw) {
+    return [];
+  }
+  return raw
+    .split(/[,\r\n]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function resolveSettingPath(name, fallback) {
+  const raw = readSetting(name, '');
+  return raw ? resolve(repoRoot, raw) : fallback;
+}
+
 function normalizeText(value) {
   return String(value || '').replace(/\\/g, '/').toLowerCase();
 }
 
 const helperConfig = {
-  mcpRoot: readSetting('COMMAND_CENTER_MCP_ROOT', 'D:\\coding\\my-mcp-servers')
+  host: readSetting('COMMAND_CENTER_HELPER_HOST', '127.0.0.1'),
+  port: readIntegerSetting('COMMAND_CENTER_HELPER_PORT', 3211),
+  outputDir: resolveSettingPath('COMMAND_CENTER_OUTPUT_DIR', join(repoRoot, 'output', 'command-center')),
+  allowedOrigins: readListSetting('COMMAND_CENTER_ALLOWED_ORIGINS'),
+  mcpRoot: readSetting('COMMAND_CENTER_MCP_ROOT', '')
 };
 
 helperConfig.filesystemDir = readSetting(
   'COMMAND_CENTER_FILESYSTEM_DIR',
-  join(helperConfig.mcpRoot, 'mcp-filesystem')
+  helperConfig.mcpRoot ? join(helperConfig.mcpRoot, 'mcp-filesystem') : ''
 );
-helperConfig.filesystemTarget = readSetting('COMMAND_CENTER_FILESYSTEM_TARGET', 'D:/coding');
+helperConfig.filesystemTarget = readSetting('COMMAND_CENTER_FILESYSTEM_TARGET', repoRoot);
 helperConfig.puppeteerDir = readSetting(
   'COMMAND_CENTER_PUPPETEER_DIR',
-  join(helperConfig.mcpRoot, 'puppeteer')
+  helperConfig.mcpRoot ? join(helperConfig.mcpRoot, 'puppeteer') : ''
 );
 helperConfig.tencentcodeDir = readSetting(
   'COMMAND_CENTER_TENCENTCODE_DIR',
-  join(helperConfig.mcpRoot, 'tencentcode-mcp')
+  helperConfig.mcpRoot ? join(helperConfig.mcpRoot, 'tencentcode-mcp') : ''
 );
+
+const HOST = helperConfig.host;
+const PORT = helperConfig.port;
+const outputRoot = helperConfig.outputDir;
+const serviceLogDir = join(outputRoot, 'service-logs');
+const diagnosticsLogFile = join(outputRoot, 'api-diagnostics.jsonl');
+
+mkdirSync(serviceLogDir, { recursive: true });
+
+function isLoopbackOrigin(origin) {
+  try {
+    const url = new URL(origin);
+    return (
+      (url.protocol === 'http:' || url.protocol === 'https:') &&
+      (url.hostname === '127.0.0.1' || url.hostname === 'localhost' || url.hostname === '[::1]' || url.hostname === '::1')
+    );
+  } catch (error) {
+    return false;
+  }
+}
+
+function isAllowedOrigin(origin) {
+  if (!origin) {
+    return true;
+  }
+  if (helperConfig.allowedOrigins.length) {
+    return helperConfig.allowedOrigins.includes(origin);
+  }
+  return isLoopbackOrigin(origin);
+}
+
+function createServiceDefinition(options) {
+  const configured = !!(options.cwd && options.scriptPath && existsSync(options.scriptPath));
+  return {
+    id: options.id,
+    name: options.name,
+    cwd: configured ? options.cwd : null,
+    path: options.cwd || '--',
+    args: configured ? options.args : [],
+    command: configured ? options.command : options.hint,
+    configHint: options.hint,
+    configured,
+    matchers: configured ? [normalizeText(options.scriptPath)] : []
+  };
+}
 
 function buildServiceDefinitions(config) {
   const filesystemScript = join(
@@ -106,33 +166,33 @@ function buildServiceDefinitions(config) {
   const tencentcodeScript = join(config.tencentcodeDir, 'dist', 'index.js');
 
   return {
-    filesystem: {
+    filesystem: createServiceDefinition({
       id: 'filesystem',
       name: 'Filesystem MCP',
       cwd: config.filesystemDir,
-      path: config.filesystemDir,
-      args: [filesystemScript, config.filesystemTarget],
+      scriptPath: filesystemScript,
+      args: filesystemScript ? [filesystemScript, config.filesystemTarget] : [],
       command: 'node node_modules/@modelcontextprotocol/server-filesystem/dist/index.js ' + config.filesystemTarget,
-      matchers: [normalizeText(filesystemScript)]
-    },
-    puppeteer: {
+      hint: 'Set COMMAND_CENTER_FILESYSTEM_DIR or COMMAND_CENTER_MCP_ROOT to enable this service.'
+    }),
+    puppeteer: createServiceDefinition({
       id: 'puppeteer',
       name: 'Puppeteer MCP',
       cwd: config.puppeteerDir,
-      path: config.puppeteerDir,
-      args: [puppeteerScript],
+      scriptPath: puppeteerScript,
+      args: puppeteerScript ? [puppeteerScript] : [],
       command: 'node node_modules/puppeteer-real-browser-mcp-server/dist/index.js',
-      matchers: [normalizeText(puppeteerScript)]
-    },
-    tencentcode: {
+      hint: 'Set COMMAND_CENTER_PUPPETEER_DIR or COMMAND_CENTER_MCP_ROOT to enable this service.'
+    }),
+    tencentcode: createServiceDefinition({
       id: 'tencentcode',
       name: 'Tencent Code MCP',
       cwd: config.tencentcodeDir,
-      path: config.tencentcodeDir,
-      args: [tencentcodeScript],
+      scriptPath: tencentcodeScript,
+      args: tencentcodeScript ? [tencentcodeScript] : [],
       command: 'node dist/index.js',
-      matchers: [normalizeText(tencentcodeScript)]
-    }
+      hint: 'Set COMMAND_CENTER_TENCENTCODE_DIR or COMMAND_CENTER_MCP_ROOT to enable this service.'
+    })
   };
 }
 
@@ -417,6 +477,9 @@ async function stopService(id) {
 
 async function startService(id) {
   const service = ensureService(id);
+  if (!service.configured) {
+    throw new Error(service.configHint || `${id} is not configured`);
+  }
   const services = await inspectServices();
   const snapshot = services.find((item) => item.id === id);
   if (snapshot?.running) {
@@ -456,7 +519,7 @@ async function waitForService(id, timeoutMs) {
 
 function writeJson(response, request, statusCode, payload) {
   const origin = request.headers.origin;
-  if (origin && ALLOWED_ORIGINS.has(origin)) {
+  if (origin && isAllowedOrigin(origin)) {
     response.setHeader('Access-Control-Allow-Origin', origin);
     response.setHeader('Vary', 'Origin');
   }
@@ -475,7 +538,12 @@ async function buildSnapshot() {
       startedAt: helperStartedAt,
       origin: `http://${HOST}:${PORT}`,
       socket: `ws://${HOST}:${PORT}/ws`,
-      config: helperConfig
+      config: {
+        ...helperConfig,
+        allowedOrigins: helperConfig.allowedOrigins.length
+          ? helperConfig.allowedOrigins.slice()
+          : ['loopback origins only']
+      }
     },
     services: await inspectServices(),
     diagnostics: diagnostics.slice(-10)
@@ -654,7 +722,12 @@ async function handleRequest(request, response) {
       pid: process.pid,
       startedAt: helperStartedAt,
       socket: `ws://${HOST}:${PORT}/ws`,
-      config: helperConfig
+      config: {
+        ...helperConfig,
+        allowedOrigins: helperConfig.allowedOrigins.length
+          ? helperConfig.allowedOrigins.slice()
+          : ['loopback origins only']
+      }
     });
     return;
   }
@@ -703,7 +776,7 @@ server.on('upgrade', (request, socket) => {
     socket.destroy();
     return;
   }
-  if (origin && !ALLOWED_ORIGINS.has(origin)) {
+  if (origin && !isAllowedOrigin(origin)) {
     socket.write('HTTP/1.1 403 Forbidden\r\n\r\n');
     socket.destroy();
     return;

@@ -205,8 +205,22 @@ It provides:
 
 Default endpoints:
 
-- `http://127.0.0.1:3211/health`
-- `ws://127.0.0.1:3211/ws`
+- `http://127.0.0.1:3211/health` by default
+- `ws://127.0.0.1:3211/ws` by default
+
+Relevant helper environment variables are listed in `.env.example`:
+
+```env
+COMMAND_CENTER_HELPER_HOST=127.0.0.1
+COMMAND_CENTER_HELPER_PORT=3211
+COMMAND_CENTER_ALLOWED_ORIGINS=
+COMMAND_CENTER_OUTPUT_DIR=
+COMMAND_CENTER_MCP_ROOT=
+COMMAND_CENTER_FILESYSTEM_TARGET=
+COMMAND_CENTER_FILESYSTEM_DIR=
+COMMAND_CENTER_PUPPETEER_DIR=
+COMMAND_CENTER_TENCENTCODE_DIR=
+```
 
 ### What AI Quickstart Is
 

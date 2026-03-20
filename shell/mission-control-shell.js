@@ -4,7 +4,7 @@
   var LANGUAGE_KEY = 'mission-control.lang';
   var THEME_KEY = 'mission-control.theme';
   var OPENCLAW_LOCALE_KEY = 'openclaw.i18n.locale';
-  var DEFAULT_HELPER_BASE = 'ws://127.0.0.1:3211/ws';
+  var DEFAULT_HELPER_PORT = '3211';
   var REFRESH_MS = 5000;
   var LIVE_SYNC_MS = 400;
   var LIVE_SYNC_DEBOUNCE_MS = 80;
@@ -45,11 +45,13 @@
       'mcp.title': '主机服务目录',
       'mcp.helperOffline': 'Helper API 当前不可用：{base}。运行 `node scripts/command-center-helper.mjs` 后即可启用主机级 MCP 控制。',
       'mcp.noProcess': '当前没有匹配到该服务定义的进程。',
+      'mcp.notConfigured': '当前未配置。先设置对应的 COMMAND_CENTER_* 环境变量。',
       'mcp.path': '路径',
       'mcp.command': '命令',
       'mcp.start': '启动',
       'mcp.restart': '重启',
       'mcp.stop': '关闭',
+      'mcp.status.unconfigured': '未配置',
       'mcp.status.stopped': '已停止',
       'mcp.status.duplicate': '重复实例',
       'mcp.status.managed': '托管中',
@@ -276,11 +278,13 @@
       'mcp.title': 'Host services under',
       'mcp.helperOffline': 'Helper API is offline at {base}. Run `node scripts/command-center-helper.mjs` to enable host MCP control.',
       'mcp.noProcess': 'No process matched this service definition.',
+      'mcp.notConfigured': 'Not configured yet. Set the relevant COMMAND_CENTER_* environment variables first.',
       'mcp.path': 'Path',
       'mcp.command': 'Command',
       'mcp.start': 'Start',
       'mcp.restart': 'Restart',
       'mcp.stop': 'Stop',
+      'mcp.status.unconfigured': 'unconfigured',
       'mcp.status.stopped': 'stopped',
       'mcp.status.duplicate': 'duplicate',
       'mcp.status.managed': 'managed',
@@ -558,11 +562,21 @@
     }
   };
 
+  function defaultHelperBase() {
+    var host = '127.0.0.1';
+    try {
+      if (window.location && window.location.hostname) {
+        host = window.location.hostname;
+      }
+    } catch (error) {}
+    return 'ws://' + host + ':' + DEFAULT_HELPER_PORT + '/ws';
+  }
+
   function loadHelperBase() {
     try {
-      return localStorage.getItem(HELPER_BASE_KEY) || DEFAULT_HELPER_BASE;
+      return localStorage.getItem(HELPER_BASE_KEY) || defaultHelperBase();
     } catch (error) {
-      return DEFAULT_HELPER_BASE;
+      return defaultHelperBase();
     }
   }
 
@@ -630,7 +644,7 @@
   }
 
   function getHelperSocketUrl() {
-    var base = state.helperBase || DEFAULT_HELPER_BASE;
+    var base = state.helperBase || defaultHelperBase();
     if (/^https?:/i.test(base)) {
       base = base.replace(/^http/i, 'ws');
     }
@@ -2492,6 +2506,9 @@
   }
 
   function helperServiceTone(service) {
+    if (!service || service.configured === false) {
+      return 'cc-badge-warn';
+    }
     if (!service || !service.running) {
       return 'cc-badge-warn';
     }
@@ -2502,6 +2519,9 @@
   }
 
   function helperServiceStatus(service) {
+    if (!service || service.configured === false) {
+      return t('mcp.status.unconfigured');
+    }
     if (!service || !service.running) {
       return t('mcp.status.stopped');
     }
@@ -2523,7 +2543,9 @@
       refs.mcpStatus,
       services.map(function (service) {
         var processes = Array.isArray(service.processes) ? service.processes : [];
-        var processLines = processes.length
+        var processLines = service.configured === false
+          ? '<div class="cc-placeholder">' + escapeHtml(t('mcp.notConfigured')) + '</div>'
+          : processes.length
           ? processes.map(function (proc) {
               return (
                 '<div class="cc-process-line">' +
@@ -2533,6 +2555,7 @@
               );
             }).join('')
           : '<div class="cc-placeholder">' + escapeHtml(t('mcp.noProcess')) + '</div>';
+        var disabled = service.configured === false ? ' disabled' : '';
 
         return (
           '<article class="cc-service">' +
@@ -2544,9 +2567,9 @@
             '<div class="cc-service-copy">' + escapeHtml(t('mcp.command')) + ': <code>' + escapeHtml(service.command) + '</code></div>' +
             '<div class="cc-service-processes">' + processLines + '</div>' +
             '<div class="cc-service-actions">' +
-              '<button class="cc-action cc-action-small" data-service-action="start" data-service-id="' + escapeHtml(service.id) + '" type="button">' + escapeHtml(t('mcp.start')) + '</button>' +
-              '<button class="cc-action cc-action-small cc-action-primary" data-service-action="restart" data-service-id="' + escapeHtml(service.id) + '" type="button">' + escapeHtml(t('mcp.restart')) + '</button>' +
-              '<button class="cc-action cc-action-small" data-service-action="stop" data-service-id="' + escapeHtml(service.id) + '" type="button">' + escapeHtml(t('mcp.stop')) + '</button>' +
+              '<button class="cc-action cc-action-small" data-service-action="start" data-service-id="' + escapeHtml(service.id) + '" type="button"' + disabled + '>' + escapeHtml(t('mcp.start')) + '</button>' +
+              '<button class="cc-action cc-action-small cc-action-primary" data-service-action="restart" data-service-id="' + escapeHtml(service.id) + '" type="button"' + disabled + '>' + escapeHtml(t('mcp.restart')) + '</button>' +
+              '<button class="cc-action cc-action-small" data-service-action="stop" data-service-id="' + escapeHtml(service.id) + '" type="button"' + disabled + '>' + escapeHtml(t('mcp.stop')) + '</button>' +
             '</div>' +
           '</article>'
         );
@@ -2751,7 +2774,7 @@
       showToast((result && result.message) || (serviceId + ' ' + action + ' ok'));
       updateView();
     } catch (error) {
-      showToast(t('common.helperActionFailed', { action: t('common.action.' + action) }));
+      showToast((error && error.message) || t('common.helperActionFailed', { action: t('common.action.' + action) }));
       await fetchHelperSnapshot();
     }
   }
