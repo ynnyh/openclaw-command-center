@@ -29,6 +29,12 @@ OpenClaw Command Center 是一个面向现有 OpenClaw 部署的 control UI over
   跨平台 overlay builder，从运行中的 OpenClaw 容器生成 `custom-ui`
 - `docs/AI-QUICKSTART.md`
   给 AI / coding agent 的接入契约
+- `docs/architecture.md`
+  对外的架构说明
+- `docs/compatibility.md`
+  当前支持边界与兼容性说明
+- `docs/troubleshooting.md`
+  常见问题与排障入口
 - `examples/openclaw.command-center.patch.json`
   最小配置 patch，把 `gateway.controlUi.root` 指到 `/custom-ui`
 - `examples/docker-compose.command-center.override.yml`

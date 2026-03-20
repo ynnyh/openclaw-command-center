@@ -20,6 +20,9 @@ OpenClaw Command Center 是一个面向现有 OpenClaw 部署的 control UI over
 ## Quick Links
 
 - [AI Quickstart](docs/AI-QUICKSTART.md)
+- [Architecture](docs/architecture.md)
+- [Compatibility](docs/compatibility.md)
+- [Troubleshooting](docs/troubleshooting.md)
 - [Config patch example](examples/openclaw.command-center.patch.json)
 - [Compose override example](examples/docker-compose.command-center.override.yml)
 
